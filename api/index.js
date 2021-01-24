@@ -4,14 +4,17 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const TodoModel = require("./model/todoModel");
+require("dotenv").config()
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(session({ secret: "mysecret" }));
 
+const pass=process.env.DB_PASS
+
 mongoose
   .connect(
-    "mongodb+srv://emodb:emodb@todo.jycp5.mongodb.net/todo?retryWrites=true&w=majority",
+    `mongodb+srv://emodb:${pass}@todo.jycp5.mongodb.net/todo?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
